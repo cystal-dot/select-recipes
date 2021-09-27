@@ -8,7 +8,7 @@ import com.example.apps.controller.DefaultController;
 
 import org.junit.jupiter.api.Test;
 
-public class  DemoControllerTest{
+public class  DefaultControllerTest{
 
     public DefaultController target = new DefaultController();
 
@@ -17,4 +17,4 @@ public class  DemoControllerTest{
 //         String actual = target.index();
 //         assertEquals("index",actual);
 //     }
- }
+}
