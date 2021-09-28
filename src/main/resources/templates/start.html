@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>start</title>
+</head>
+<body>
+<form th:action="@{/view}" method="post"><!--viewのリクエストマッピングにpostでリクエストを送る-->
+    <p>
+        <input type="submit" value="料理一覧,追加,削除">
+        <input type="hidden">
+    </p>
+</form>
+<form th:action="@{/howto}" method="post"><!--howtoのリクエストマッピングにpostでリクエストを送る-->
+    <p>
+        <input type="submit" value="使い方">
+        <input type="hidden">
+    </p>
+</form>
+</body>
+</html>

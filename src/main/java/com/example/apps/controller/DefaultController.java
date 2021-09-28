@@ -8,17 +8,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class DefaultController{
-    // @RequestMapping("/index")
-    //     public String index(){
-    //         return "index";
-    // }
 
-    @RequestMapping("/name")
-    public String name(){
-        return "name";
+    @RequestMapping("/")
+    public String start(){
+        return "start";
     }
 
-    @RequestMapping(path = "age", method = RequestMethod.POST)
+    @RequestMapping("/view")
+    public String view(){
+        return "view";
+    }
+
+    @RequestMapping("/howto")
+    public String howto(){
+        return "howto";
+    }
+
+    @RequestMapping(path = "age", method = RequestMethod.POST)//どのurlからもらうか.
     public String age(@RequestParam("name") String name, Model model) {
         model.addAttribute("name", name);
         return "age";
