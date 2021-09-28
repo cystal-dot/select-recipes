@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Name</title>
+</head>
+<body>
+<form th:action="@{/start}" method="post"><!--startのリクエストマッピングにpostでリクエストを送る-->
+    <p>
+        <label for="regist">登録したい料理名を入力してください</label>
+        <input type="text" name="name" id="name">
+        <br>
+        ジャンル
+        <select name="genre" name="genre" size="1"> 
+            <option value="japanese">和食</option>
+            <option value="chinese">中華</option>
+            <option value="western">洋食</option>
+        </select>
+    </p>
+    <p>
+        <input type="submit" value="登録">
+    </p>
+</form>
+</body>
+</html>

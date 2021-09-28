@@ -1,4 +1,4 @@
-package com.example.demogradle.Controller;
+package com.example.selectrecipes.Controller;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
