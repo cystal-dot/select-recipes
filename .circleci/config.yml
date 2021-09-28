@@ -35,9 +35,9 @@ workflows:
         # testジョブとdeployジョブを登録する
         jobs:
             - test
-            - deploy:
-                requires:
-                  - test
+            # - deploy:
+            #     requires:
+            #       - test
                 # filters: 
                 #     branches:
                 #         only: master #デプロイするのはmainブランチにプッシュされたときのみ
