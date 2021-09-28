@@ -1,0 +1,9 @@
+.gradle/7.2/executionHistory/executionHistory.bin
+.gradle/buildOutputCleanup/outputFiles.bin
+.gradle/7.2/fileHashes/resourceHashesCache.bin
+.gradle/7.2/fileHashes/fileHashes.lock
+/.gradle/
+select-recipes/build/
+select-recipes/bin/
+select-recipes/.gradle/
+build/
