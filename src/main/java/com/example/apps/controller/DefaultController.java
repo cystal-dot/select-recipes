@@ -1,13 +1,22 @@
 package com.example.apps.controller;
 
+import java.sql.JDBCType;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import javax.sql.DataSource;
 
 @Controller
+@RequestMapping()
 public class DefaultController{
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @RequestMapping("/")
     public String start(){
