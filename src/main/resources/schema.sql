@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS cooking;
+
+CREATE TABLE cooking
+(
+   id INT NOT NULL AUTO_INCREMENT,
+   name VARCHAR(100),
+   genre VARCHAR(100),
+   PRIMARY KEY(id)
+);
