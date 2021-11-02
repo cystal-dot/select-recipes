@@ -6,4 +6,3 @@ bin/main/
 .vscode/settings.json
 gradle/
 .project/
-.classpath/

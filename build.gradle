@@ -21,6 +21,8 @@ dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	runtimeOnly 'mysql:mysql-connector-java'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 }
 
 test {
@@ -34,4 +36,10 @@ test {
     // 例外発生時の出力設定 (TestExceptionFormat)
     exceptionFormat 'full'
   }
+}
+
+configurations {
+    compileOnly {
+            extendsFrom annotationProcessor
+    }
 }
