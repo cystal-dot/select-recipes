@@ -1,9 +1,7 @@
 .gradle/
-select-recipes/build/
-select-recipes/bin/
-select-recipes/.gradle/
 build/
 bin/
+bin/main/
 .bin/
 .vscode/settings.json
 gradle/
