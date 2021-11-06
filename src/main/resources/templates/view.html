@@ -5,10 +5,16 @@
     <title>viewer</title>
 </head>
 <body>
-    <th:block th:each="ingredient : ${allIngredients}">
-        <p th:text="${allIngredients.value}"></p>
-        <p th:text="${allIngredients}"></p>
-    </th:block>
+    <tr th:each="ingredient : ${allIngredients}">
+        <td th:text="${ingredient.DishId}"></td>
+        <td th:text="${ingredient.Dishname}"></td>
+        <td th:text="${ingredient.Ingredient1}"></td>
+        <td th:text="${ingredient.Ingredient2}"></td>
+        <td th:text="${ingredient.Ingredient3}"></td>
+        <td th:text="${ingredient.Ingredient4}"></td>
+        <br>
+    </tr>
+
     <form th:action="@{/registdish}" method="post"><!--registdishのリクエストマッピングにpostでリクエストを送るstartじゃなくて/かも-->
         <p>
         <label for="regist">登録したい料理名を入力してください</label>

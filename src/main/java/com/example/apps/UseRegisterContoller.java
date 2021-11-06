@@ -4,21 +4,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 
-import com.example.apps.DAO.UseSelecterDAO;
 import com.example.apps.bean.Cooking;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping()
 public class UseRegisterContoller {
-
-    private UseSelecterDAO useSelecterDAO = new UseSelecterDAO();
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -31,17 +31,49 @@ public class UseRegisterContoller {
         jdbcTemplate.update(UpdateCookingSQL,DishName,Genre);//cookingテーブルに名前とジャンルを登録
 
         final String GetLatestDishIdSQL = "SELECT DishId FROM cooking ORDER BY DishId DESC LIMIT 1";
-        int LatestDishId = jdbcTemplate.queryForObject(GetLatestDishIdSQL, Integer.class);//最新のDishIdのリストを取得
-        final String UpdateIngredientsSQL = "INSERT INTO ingredients(DishId,Ingredient1,Ingredient2,Ingredient3,Ingredient4) VALUES(" + LatestDishId + ",?,?,?,?)";
+        int LatestDishId = jdbcTemplate.queryForObject(GetLatestDishIdSQL, Integer.class);//最新のDishIdを取得
 
+        //IDを元に材料を登録
+        final String UpdateIngredientsSQL = "INSERT INTO ingredients(DishId,Ingredient1,Ingredient2,Ingredient3,Ingredient4) VALUES(" + LatestDishId + ",?,?,?,?)";
         jdbcTemplate.update(UpdateIngredientsSQL,Ingredient1,Ingredient2,Ingredient3,Ingredient4);//材料登録
 
-        // String DishId = Integer.toString(LatestDishId);無限リロードの原因ここ
-        // List<Cooking> allIngredients = useSelecterDAO.getAllIngredients("1");//とりあえず最新のレシピ。並べるならここを各dishidごとに取得して並べる。
-        // System.out.println("check"+allIngredients);
 
-        // model.addAttribute("allIngredients", allIngredients);//材料一覧
+        System.out.println("latestid"+LatestDishId);
+        List<Cooking> allIngredients = this.getAllIngredients(LatestDishId);//すべてのIDと対応する材料をcookingに入れてる
+
+        model.addAttribute("allIngredients", allIngredients);//材料一覧をタイムリーフに渡す
 
         return "view";//登録完了ページ作ったらそっちに飛ばしたい
+    }
+
+
+    public List<Cooking> getAllIngredients(int DishId){//引数はingredientテーブルの要素数だからそれを元に全材料取得したい
+        
+        List<Cooking> ingredientsList = new ArrayList<>();//return用のリスト
+        List<Map<String, Object>> getIngredientList = null;
+        for(int i=1;i<DishId+1;i++){
+            final String GetIngredientsSQL = "SELECT Ingredient1,Ingredient2,Ingredient3,Ingredient4 FROM ingredients WHERE DishId = "+i;
+            getIngredientList = jdbcTemplate.queryForList(GetIngredientsSQL);
+
+            //idから料理名取得
+            final String GetDishNameSQL = "SELECT DishName from cooking where DishId = "+i;
+            String DishName = jdbcTemplate.queryForObject(GetDishNameSQL,String.class);
+
+            //取得したデータをreturn用の変数に格納
+            for(Map<String,Object> map : getIngredientList){
+        
+                Cooking cooking = new Cooking();
+                cooking.setDishId(i);
+                cooking.setDishname(DishName);
+                cooking.setIngredient1((String)map.get("ingredient1"));
+                cooking.setIngredient2((String)map.get("ingredient2"));
+                cooking.setIngredient3((String)map.get("ingredient3"));
+                cooking.setIngredient4((String)map.get("ingredient4"));
+
+                //return用のListに追加
+                ingredientsList.add(cooking);
+            }
+        }
+        return ingredientsList;
     }
 }

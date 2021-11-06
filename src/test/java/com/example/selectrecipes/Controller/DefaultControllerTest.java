@@ -35,11 +35,11 @@ public class  DefaultControllerTest{
 
         DefaultController targetnotmock = new DefaultController();
 
-        String actualname = targetnotmock.view();
+        //String actualname = targetnotmock.view();
         // String actualage = target.age("a", model);
         // String actualhello = target.hello("name", "age", model);
 
-        assertThat("view", is(actualname));
+        //assertThat("view", is(actualname));
         // assertThat("age", is(actualage));
         // assertThat("hello", is(actualhello));
     }
