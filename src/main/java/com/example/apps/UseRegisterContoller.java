@@ -38,7 +38,7 @@ public class UseRegisterContoller {
 
         // String DishId = Integer.toString(LatestDishId);無限リロードの原因ここ
         // List<Cooking> allIngredients = useSelecterDAO.getAllIngredients("1");//とりあえず最新のレシピ。並べるならここを各dishidごとに取得して並べる。
-        // System.out.println("check"+allIngredients);
+        // System.out.println("check"+allIngredients);  asfsadf
 
         // model.addAttribute("allIngredients", allIngredients);//材料一覧
 
