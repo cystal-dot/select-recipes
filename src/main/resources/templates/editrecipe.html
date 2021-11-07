@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<ja=html>
+<head>
+    <meta charset="utf-8">
+    <title>EditRecipe</title>
+</head>
+<body>
+    <h1>EditRecipe</h1>
+    <form th:action="@{/editinformation}" method="post">
+        ID:<p th:text="${cooking.DishId}+1"></p>
+        <p>
+        <table border="1">
+            <tr>
+                <td>Name</td>
+                <td>Genre</td>
+                <td>材料①</td>
+                <td>材料②</td>
+                <td>材料③</td>
+                <td>材料④</td>
+            </tr>
+            <td><input type="text" name="DishName" th:value="${cooking.Dishname}"></td>
+            <td><input type="text" name="Genre" th:value="${cooking.Genre}"></td>
+            <td><input type="text" name="Ingredient1" th:value="${cooking.Ingredient1}"></td>
+            <td><input type="text" name="Ingredient2" th:value="${cooking.Ingredient2}"></td>
+            <td><input type="text" name="Ingredient3" th:value="${cooking.Ingredient3}"></td>
+            <td><input type="text" name="Ingredient4" th:value="${cooking.Ingredient4}"></td>
+        </table>
+        <input type="submit" value="登録">
+        <input type="hidden" name="DishId" th:value="${cooking.DishId}">
+        </p>
+    </form>
+    <form th:action="@{/view}" method="post"><!--viewのリクエストマッピングにpostでリクエストを送る-->
+        <p>
+            <input type="submit" value="一覧ページへ戻る">
+            <input type="hidden">
+        </p>
+    </form>
+</body>
+</html>

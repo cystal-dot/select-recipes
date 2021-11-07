@@ -1,5 +1,6 @@
 package com.example.apps.controller;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,46 +17,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping()
-public class DefaultController{
+public class EditRecipesController {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    
+    //編集作業。editrecipeページに飛ばして
+    @RequestMapping(value="/editinformation", method=RequestMethod.POST)
+    public String EditRecipe(@RequestParam("DishId") String DishId,@RequestParam("DishName") String DishName,@RequestParam("Genre") String Genre,@RequestParam("Ingredient1") String Ingredient1,@RequestParam("Ingredient2") String Ingredient2,@RequestParam("Ingredient3") String Ingredient3,@RequestParam("Ingredient4") String Ingredient4,Model model) {
 
-    @RequestMapping("/")
-    public String start(){
-        return "start";
-    }
+        //IDを元に材料と名前を更新
+        final String UpdateDishnameSQL ="UPDATE cooking SET Dishname=?,Genre=? WHERE DishId ="+DishId;
+        final String UpdateIngredientsSQL ="UPDATE ingredients SET Ingredient1=?,Ingredient2=?,Ingredient3=?,Ingredient4=? WHERE DishId =" + DishId;
+        jdbcTemplate.update(UpdateDishnameSQL, DishName,Genre);//名前変更
+        jdbcTemplate.update(UpdateIngredientsSQL,Ingredient1,Ingredient2,Ingredient3,Ingredient4);//材料更新
 
-    @RequestMapping("/view")
-    public String view(Model model){
-        //初回訪問時に材料リスト取得できるように
         final String GetLatestDishIdSQL = "SELECT DishId FROM cooking ORDER BY DishId DESC LIMIT 1";
         int LatestDishId = jdbcTemplate.queryForObject(GetLatestDishIdSQL, Integer.class);//最新のDishIdを取得
-
         List<Cooking> allIngredients = this.getAllIngredients(LatestDishId);//すべてのIDと対応する材料をcookingに入れてる
-        
+
         model.addAttribute("allIngredients", allIngredients);//材料一覧をタイムリーフに渡す
-        return "view";
-    }
 
-    @RequestMapping("/howto")
-    public String howto(){
-        return "howto";
+        return "view";//viewに飛ばす
     }
-
-    @RequestMapping(path = "age", method = RequestMethod.POST)//どのurlからもらうか.
-    public String age(@RequestParam("name") String name, Model model) {
-        model.addAttribute("name", name);
-        return "age";
-    }
-
-    @RequestMapping(path = "hello", method = RequestMethod.POST)
-    public String hello(@RequestParam("name") String name, @RequestParam("age") String age, Model model) {
-        model.addAttribute("name", name);//age.htmlからパラメータを2つもらっているからattributeにそれぞれ追加する
-        model.addAttribute("age", age);
-        return "hello";
-    }
-
 
     public List<Cooking> getAllIngredients(int DishId){//引数はingredientテーブルの要素数だからそれを元に全材料取得したい
         
