@@ -60,12 +60,10 @@ public class TotalViewContoller {
         //名前取得
         final String GetDishNameSQL = "SELECT Dishname FROM cooking WHERE DishId =" + EditId;
         String DishName = jdbcTemplate.queryForObject(GetDishNameSQL, String.class);
-        System.out.println("2:");
         //ジャンル取得
         final String GetGenreSQL = "SELECT Genre FROM cooking WHERE DishId =" + EditId;
         String Genre = jdbcTemplate.queryForObject(GetGenreSQL, String.class);
 
-        System.out.println("3:");
         //cookingインスタンスに格納
         for(Map<String,Object> map : getIngredientList){
             cooking.setDishname(DishName);
@@ -75,9 +73,7 @@ public class TotalViewContoller {
             cooking.setIngredient3((String)map.get("ingredient3"));
             cooking.setIngredient4((String)map.get("ingredient4"));
         }
-        System.out.println("4:");
-        model.addAttribute(cooking);        
-        System.out.println("5:");
+        model.addAttribute(cooking);
         return "editrecipe";
     }
 
