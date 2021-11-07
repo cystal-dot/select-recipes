@@ -24,15 +24,17 @@ public class EditRecipesController {
     
     //編集作業。editrecipeページに飛ばして
     @RequestMapping(value="/editinformation", method=RequestMethod.POST)
-    public String EditRecipe(@RequestParam("DishId") String dishIdString,@RequestParam("DishName") String DishName,@RequestParam("Genre") String Genre,@RequestParam("Ingredient1") String Ingredient1,@RequestParam("Ingredient2") String Ingredient2,@RequestParam("Ingredient3") String Ingredient3,@RequestParam("Ingredient4") String Ingredient4,Model model) {
+    public String EditRecipe(@RequestParam("DishId") String DishId,@RequestParam("DishName") String DishName,@RequestParam("Genre") String Genre,@RequestParam("Ingredient1") String Ingredient1,@RequestParam("Ingredient2") String Ingredient2,@RequestParam("Ingredient3") String Ingredient3,@RequestParam("Ingredient4") String Ingredient4,Model model) {
 
-        int DishId = Integer.parseInt(dishIdString)-1;
+        //IDを元に材料と名前を更新
+        final String UpdateDishnameSQL ="UPDATE cooking SET Dishname=?,Genre=? WHERE DishId ="+DishId;
+        final String UpdateIngredientsSQL ="UPDATE ingredients SET Ingredient1=?,Ingredient2=?,Ingredient3=?,Ingredient4=? WHERE DishId =" + DishId;
+        jdbcTemplate.update(UpdateDishnameSQL, DishName,Genre);//名前変更
+        jdbcTemplate.update(UpdateIngredientsSQL,Ingredient1,Ingredient2,Ingredient3,Ingredient4);//材料更新
 
-        //IDを元に材料を更新
-        final String UpdateIngredientsSQL = "UPDATE ingredients SET (DishName,Genre,Ingredient1,Ingredient2,Ingredient3,Ingredient4) VALUES(" + DishId + ",?,?,?,?,?,?)";
-        jdbcTemplate.update(UpdateIngredientsSQL,DishName,Genre,Ingredient1,Ingredient2,Ingredient3,Ingredient4);//材料登録
-
-        List<Cooking> allIngredients = this.getAllIngredients(DishId);//すべてのIDと対応する材料をcookingに入れてる
+        final String GetLatestDishIdSQL = "SELECT DishId FROM cooking ORDER BY DishId DESC LIMIT 1";
+        int LatestDishId = jdbcTemplate.queryForObject(GetLatestDishIdSQL, Integer.class);//最新のDishIdを取得
+        List<Cooking> allIngredients = this.getAllIngredients(LatestDishId);//すべてのIDと対応する材料をcookingに入れてる
 
         model.addAttribute("allIngredients", allIngredients);//材料一覧をタイムリーフに渡す
 

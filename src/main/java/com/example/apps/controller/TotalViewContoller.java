@@ -51,7 +51,6 @@ public class TotalViewContoller {
         //EditIdを元にテーブル表示してそれぞれ自由に編集させる
         //材料を取得してthymeleafに渡す(ここで初期値を表示させる.valueにingredient入れる)
         
-        System.out.println("EditId:"+EditId);
         //材料と取得してインスタンスに入れる
         final String GetIngredientSQL = "SELECT Ingredient1,Ingredient2,Ingredient3,Ingredient4 FROM ingredients WHERE DishId =" + EditId;
         Cooking cooking = new Cooking();//渡す用のインスタンス
@@ -66,6 +65,7 @@ public class TotalViewContoller {
 
         //cookingインスタンスに格納
         for(Map<String,Object> map : getIngredientList){
+            cooking.setDishId(Integer.parseInt(EditId));
             cooking.setDishname(DishName);
             cooking.setGenre(Genre);
             cooking.setIngredient1((String)map.get("ingredient1"));
