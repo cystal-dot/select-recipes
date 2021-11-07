@@ -68,6 +68,9 @@ public class DefaultController{
             //idから料理名取得
             final String GetDishNameSQL = "SELECT DishName from cooking where DishId = "+i;
             String DishName = jdbcTemplate.queryForObject(GetDishNameSQL,String.class);
+            //ジャンル取得
+            final String GetGenreSQL = "SELECT Genre FROM cooking WHERE DishId =" + i;
+            String Genre = jdbcTemplate.queryForObject(GetGenreSQL, String.class);
 
             //取得したデータをreturn用の変数に格納
             for(Map<String,Object> map : getIngredientList){
@@ -75,6 +78,7 @@ public class DefaultController{
                 Cooking cooking = new Cooking();
                 cooking.setDishId(i);
                 cooking.setDishname(DishName);
+                cooking.setGenre(Genre);
                 cooking.setIngredient1((String)map.get("ingredient1"));
                 cooking.setIngredient2((String)map.get("ingredient2"));
                 cooking.setIngredient3((String)map.get("ingredient3"));

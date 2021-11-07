@@ -1,4 +1,4 @@
-package com.example.apps;
+package com.example.apps.controller;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.example.apps;
+package com.example.apps.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +10,7 @@ import java.util.Map;
 import com.example.apps.bean.Cooking;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jca.cci.object.EisOperation;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping()
-public class UseRegisterContoller {
+public class TotalViewContoller {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -37,8 +38,6 @@ public class UseRegisterContoller {
         final String UpdateIngredientsSQL = "INSERT INTO ingredients(DishId,Ingredient1,Ingredient2,Ingredient3,Ingredient4) VALUES(" + LatestDishId + ",?,?,?,?)";
         jdbcTemplate.update(UpdateIngredientsSQL,Ingredient1,Ingredient2,Ingredient3,Ingredient4);//材料登録
 
-
-        System.out.println("latestid"+LatestDishId);
         List<Cooking> allIngredients = this.getAllIngredients(LatestDishId);//すべてのIDと対応する材料をcookingに入れてる
 
         model.addAttribute("allIngredients", allIngredients);//材料一覧をタイムリーフに渡す
@@ -46,6 +45,41 @@ public class UseRegisterContoller {
         return "view";//登録完了ページ作ったらそっちに飛ばしたい
     }
 
+    //編集作業。editrecipeページに飛ばして
+    @RequestMapping(value="editrecipe", method=RequestMethod.POST)
+    public String EditRecipe(@RequestParam("EditId") String EditId,Model model) {
+        //EditIdを元にテーブル表示してそれぞれ自由に編集させる
+        //材料を取得してthymeleafに渡す(ここで初期値を表示させる.valueにingredient入れる)
+        
+        System.out.println("EditId:"+EditId);
+        //材料と取得してインスタンスに入れる
+        final String GetIngredientSQL = "SELECT Ingredient1,Ingredient2,Ingredient3,Ingredient4 FROM ingredients WHERE DishId =" + EditId;
+        Cooking cooking = new Cooking();//渡す用のインスタンス
+        List<Map<String, Object>> getIngredientList = null;//材料を一時保管するためのインスタンス
+        getIngredientList = jdbcTemplate.queryForList(GetIngredientSQL);//材料取得
+        //名前取得
+        final String GetDishNameSQL = "SELECT Dishname FROM cooking WHERE DishId =" + EditId;
+        String DishName = jdbcTemplate.queryForObject(GetDishNameSQL, String.class);
+        System.out.println("2:");
+        //ジャンル取得
+        final String GetGenreSQL = "SELECT Genre FROM cooking WHERE DishId =" + EditId;
+        String Genre = jdbcTemplate.queryForObject(GetGenreSQL, String.class);
+
+        System.out.println("3:");
+        //cookingインスタンスに格納
+        for(Map<String,Object> map : getIngredientList){
+            cooking.setDishname(DishName);
+            cooking.setGenre(Genre);
+            cooking.setIngredient1((String)map.get("ingredient1"));
+            cooking.setIngredient2((String)map.get("ingredient2"));
+            cooking.setIngredient3((String)map.get("ingredient3"));
+            cooking.setIngredient4((String)map.get("ingredient4"));
+        }
+        System.out.println("4:");
+        model.addAttribute(cooking);        
+        System.out.println("5:");
+        return "editrecipe";
+    }
 
     public List<Cooking> getAllIngredients(int DishId){//引数はingredientテーブルの要素数だからそれを元に全材料取得したい
         
@@ -58,6 +92,9 @@ public class UseRegisterContoller {
             //idから料理名取得
             final String GetDishNameSQL = "SELECT DishName from cooking where DishId = "+i;
             String DishName = jdbcTemplate.queryForObject(GetDishNameSQL,String.class);
+            //ジャンル取得
+            final String GetGenreSQL = "SELECT Genre FROM cooking WHERE DishId =" + i;
+            String Genre = jdbcTemplate.queryForObject(GetGenreSQL, String.class);
 
             //取得したデータをreturn用の変数に格納
             for(Map<String,Object> map : getIngredientList){
@@ -65,6 +102,7 @@ public class UseRegisterContoller {
                 Cooking cooking = new Cooking();
                 cooking.setDishId(i);
                 cooking.setDishname(DishName);
+                cooking.setGenre(Genre);
                 cooking.setIngredient1((String)map.get("ingredient1"));
                 cooking.setIngredient2((String)map.get("ingredient2"));
                 cooking.setIngredient3((String)map.get("ingredient3"));
