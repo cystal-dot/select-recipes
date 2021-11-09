@@ -2,10 +2,10 @@
 <ja=html>
 <head>
     <meta charset="utf-8">
-    <title>EditRecipe</title>
+    <title>更新ページ</title>
 </head>
 <body>
-    <h1>EditRecipe</h1>
+    <h1>更新ページ</h1>
     <form th:action="@{/editinformation}" method="post">
         ID:<p th:text="${cooking.DishId}+1"></p>
         <p>
@@ -25,7 +25,7 @@
             <td><input type="text" name="Ingredient3" th:value="${cooking.Ingredient3}"></td>
             <td><input type="text" name="Ingredient4" th:value="${cooking.Ingredient4}"></td>
         </table>
-        <input type="submit" value="登録">
+        <input type="submit" value="更新">
         <input type="hidden" name="DishId" th:value="${cooking.DishId}">
         </p>
     </form>

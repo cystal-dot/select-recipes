@@ -5,6 +5,12 @@
     <title>viewer</title>
 </head>
 <body>
+    <form th:action="@{/}" method="post"><!--viewのリクエストマッピングにpostでリクエストを送る-->
+        <p>
+            <input type="submit" value="スタートページへ戻る">
+            <input type="hidden">
+        </p>
+    </form>
     <table border="1">
         <td>ID</td>
         <td>Name</td>

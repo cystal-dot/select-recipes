@@ -5,6 +5,12 @@
 <title>start</title>
 </head>
 <body>
+<form th:action="@{/select}" method="post"><!--selectのリクエストマッピングにpostでリクエストを送る-->
+    <p>
+        <input type="submit" value="ランダムセレクト">
+        <input type="hidden">
+    </p>
+</form>
 <form th:action="@{/view}" method="post"><!--viewのリクエストマッピングにpostでリクエストを送る-->
     <p>
         <input type="submit" value="料理一覧,追加,削除">
