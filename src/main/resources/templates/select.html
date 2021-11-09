@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>start</title>
+</head>
+<body>
+<form th:action="@{/select}" method="post"><!--selectのリクエストマッピングにpostでリクエストを送る-->
+    <p>
+        <input type="submit" value="もう一度チャレンジ">
+        <input type="hidden">
+    </p>
+</form>
+<form th:action="@{/}" method="post"><!--viewのリクエストマッピングにpostでリクエストを送る-->
+    <p>
+        <input type="submit" value="スタートページへ戻る">
+        <input type="hidden">
+    </p>
+</form>
+<table border="1">
+    <td>ID</td>
+    <td>Name</td>
+    <td>Genre</td>
+    <td>材料①</td>
+    <td>材料②</td>
+    <td>材料③</td>
+    <td>材料④</td>
+    <tr th:each="recipe : ${SelectedRecipesList}">
+        <td th:text="${recipe.DishId}"></td>
+        <td th:text="${recipe.Dishname}"></td>
+        <td th:text="${recipe.Genre}"></td>      
+        <td th:text="${recipe.Ingredient1}"></td>
+        <td th:text="${recipe.Ingredient2}"></td>
+        <td th:text="${recipe.Ingredient3}"></td>
+        <td th:text="${recipe.Ingredient4}"></td>
+    </tr>
+</table>
+</body>
+</html>
