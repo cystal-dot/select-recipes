@@ -29,7 +29,7 @@ public class EditRecipesController {
         //IDを元に材料と名前を更新
         final String UpdateDishnameSQL ="UPDATE cooking SET Dishname=?,Genre=? WHERE DishId ="+DishId;
         final String UpdateIngredientsSQL ="UPDATE ingredients SET Ingredient1=?,Ingredient2=?,Ingredient3=?,Ingredient4=? WHERE DishId =" + DishId;
-        jdbcTemplate.update(UpdateDishnameSQL, DishName,Genre);//名前変更a
+        jdbcTemplate.update(UpdateDishnameSQL, DishName,Genre);//名前変更
         jdbcTemplate.update(UpdateIngredientsSQL,Ingredient1,Ingredient2,Ingredient3,Ingredient4);//材料更新
 
         final String GetLatestDishIdSQL = "SELECT DishId FROM cooking ORDER BY DishId DESC LIMIT 1";
