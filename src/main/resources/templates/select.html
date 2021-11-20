@@ -18,17 +18,17 @@
     </p>
 </form>
 <table border="1">
-    <td>ID</td>
+<!--    <td>ID</td>-->
     <td>Name</td>
-    <td>Genre</td>
+    <!--<td>Genre</td>-->
     <td>材料①</td>
     <td>材料②</td>
     <td>材料③</td>
     <td>材料④</td>
     <tr th:each="recipe : ${SelectedRecipesList}">
-        <td th:text="${recipe.DishId}"></td>
+        <!--<td th:text="${recipe.DishId}"></td>-->
         <td th:text="${recipe.Dishname}"></td>
-        <td th:text="${recipe.Genre}"></td>      
+        <!--<td th:text="${recipe.Genre}"></td>-->
         <td th:text="${recipe.Ingredient1}"></td>
         <td th:text="${recipe.Ingredient2}"></td>
         <td th:text="${recipe.Ingredient3}"></td>
