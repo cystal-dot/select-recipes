@@ -15,8 +15,9 @@
     </form>
     <form th:action="@{/registdish}" method="post"><!--registdishのリクエストマッピングにpostでリクエストを送るstartじゃなくて/かも-->
         <p>
-        <label for="regist">登録したい料理名を入力してください</label>
-        <input type="text" name="DishName" id="DishName">
+        <!-- <label for="regist">登録したい料理名を入力してください</label>
+        <input type="text" name="DishName" id="DishName"> -->
+        <input class="form-control form-control-sm" type="text" placeholder="登録したい料理名を入力してください" aria-label=".form-control-sm example" name="DishName" id="DishName">
         <br>
         <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Genre" id="Genre">
             <option selected>ジャンル選択</option>
@@ -25,10 +26,10 @@
             <option value="western">洋食</option>
         </select>
         <br>レシピ登録<br>
-        材料１<input type="text" name="Ingredient1" id="Ingredient1">
-        材料２<input type="text" name="Ingredient2" id="Ingredient2">
-        材料３<input type="text" name="Ingredient3" id="Ingredient3">
-        材料４<input type="text" name="Ingredient4" id="Ingredient4">
+        <input class="form-control form-control-sm" type="text" placeholder="材料1" aria-label=".form-control-sm example" name="Ingredient1" id="Ingredient1">
+        <input class="form-control form-control-sm" type="text" placeholder="材料2" aria-label=".form-control-sm example" name="Ingredient2" id="Ingredient2">
+        <input class="form-control form-control-sm" type="text" placeholder="材料3" aria-label=".form-control-sm example" name="Ingredient3" id="Ingredient3">
+        <input class="form-control form-control-sm" type="text" placeholder="材料4" aria-label=".form-control-sm example" name="Ingredient4" id="Ingredient4">
         <br>
         <input type="submit" class="btn btn-secondary"  value="登録">
         </p>
