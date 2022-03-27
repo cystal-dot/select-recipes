@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
+<!--cssFromBootstrap-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <head>
     <meta charset="UTF-8">
     <title>viewer</title>
@@ -7,51 +9,55 @@
 <body>
     <form th:action="@{/}" method="post"><!--viewのリクエストマッピングにpostでリクエストを送る-->
         <p>
-            <input type="submit" value="スタートページへ戻る">
+            <input type="submit" class="btn btn-secondary" value="スタートページへ戻る">
             <input type="hidden">
         </p>
     </form>
     <form th:action="@{/registdish}" method="post"><!--registdishのリクエストマッピングにpostでリクエストを送るstartじゃなくて/かも-->
         <p>
-        <label for="regist">登録したい料理名を入力してください</label>
-        <input type="text" name="DishName" id="DishName">
-        <br>ジャンル
-        <select name="Genre" id="Genre" size="1">
+        <!-- <label for="regist">登録したい料理名を入力してください</label>
+        <input type="text" name="DishName" id="DishName"> -->
+        <input class="form-control form-control-sm" type="text" placeholder="登録したい料理名を入力してください" aria-label=".form-control-sm example" name="DishName" id="DishName">
+        <br>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Genre" id="Genre">
+            <option selected>ジャンル選択</option>
             <option value="japanese">和食</option>
             <option value="chinese">中華</option>
             <option value="western">洋食</option>
         </select>
         <br>レシピ登録<br>
-        材料１<input type="text" name="Ingredient1" id="Ingredient1">
-        材料２<input type="text" name="Ingredient2" id="Ingredient2">
-        材料３<input type="text" name="Ingredient3" id="Ingredient3">
-        材料４<input type="text" name="Ingredient4" id="Ingredient4">
+        <input class="form-control form-control-sm" type="text" placeholder="材料1" aria-label=".form-control-sm example" name="Ingredient1" id="Ingredient1">
+        <input class="form-control form-control-sm" type="text" placeholder="材料2" aria-label=".form-control-sm example" name="Ingredient2" id="Ingredient2">
+        <input class="form-control form-control-sm" type="text" placeholder="材料3" aria-label=".form-control-sm example" name="Ingredient3" id="Ingredient3">
+        <input class="form-control form-control-sm" type="text" placeholder="材料4" aria-label=".form-control-sm example" name="Ingredient4" id="Ingredient4">
         <br>
-        <input type="submit" value="登録">
+        <input type="submit" class="btn btn-secondary"  value="登録">
         </p>
     </form>
-    <table border="1">
-        <!--<td>ID</td>-->
-        <td>Name</td>
-        <!--<td>Genre</td>-->
-        <td>材料①</td>
-        <td>材料②</td>
-        <td>材料③</td>
-        <td>材料④</td>
-        <tr th:each="ingredient : ${allIngredients}">
-<!--            <td th:text="${ingredient.DishId}"></td>-->
-            <td th:text="${ingredient.Dishname}"></td>
-<!--            <td th:text="${ingredient.Genre}"></td>-->   
-            <td th:text="${ingredient.Ingredient1}"></td>
-            <td th:text="${ingredient.Ingredient2}"></td>
-            <td th:text="${ingredient.Ingredient3}"></td>
-            <td th:text="${ingredient.Ingredient4}"></td>
-            <form th:action="@{/editrecipe}" method="post"><!--編集する食材のIDを渡してる-->
-                <td><input type="submit" value="編集"></td>
-                <input type="hidden" name="EditId" th:value="${ingredient.DishId}">
-            </form>
-        </tr>
+    一覧
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>材料①</th>
+                <th>材料②</th>
+                <th>材料③</th>
+                <th>材料④</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ingredient : ${allIngredients}">
+                <td th:text="${ingredient.Dishname}"></td>
+                <td th:text="${ingredient.Ingredient1}"></td>
+                <td th:text="${ingredient.Ingredient2}"></td>
+                <td th:text="${ingredient.Ingredient3}"></td>
+                <td th:text="${ingredient.Ingredient4}"></td>
+                <form th:action="@{/editrecipe}" method="post"><!--編集する食材のIDを渡してる-->
+                    <td><input type="submit" value="編集"></td>
+                    <input type="hidden" name="EditId" th:value="${ingredient.DishId}">
+                </form>
+            </tr>
+        </tbody>
     </table>
-
 </body>
 </html>

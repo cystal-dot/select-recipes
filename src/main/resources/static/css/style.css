@@ -1,0 +1,12 @@
+.table-responsive{
+    display: flex;
+    color: rgb(39, 14, 87);
+
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 20px;
+}
