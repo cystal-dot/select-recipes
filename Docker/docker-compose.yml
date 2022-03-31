@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    ports:
+#      - '3306:3306' #localhostにいるdockerでもなんでもないmysqlのポートと被ってる
+      - '3307:3306'
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+volumes:
+  mysql_data:
