@@ -5,9 +5,15 @@ services:
     image: mysql:5.7
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_USER: cys
+      MYSQL_PASSWORD: spring
     ports:
-#      - '3306:3306' #localhostにいるdockerでもなんでもないmysqlのポートと被ってる
-      - '3307:3306'
+      - "3307:3306"
+#      - '3306:3306' #localhostにいるdockerでもなんでもないmysqlのポートと被ってる → コンテナのIPアドレスのポート指定するから関係なかった。。
+    # expose:
+    #   - '3306'
+    # expose:
+    #   - '22'
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - ./initdb:/docker-entrypoint-initdb.d
