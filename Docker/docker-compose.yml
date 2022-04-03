@@ -19,5 +19,7 @@ services:
     #   - '22'
     volumes:
       - ./initdb:/docker-entrypoint-initdb.d
+      # データを永続的に保持するためにdbディレクトリを配置
+      - ./db:/var/lib/mysql
 volumes:
   mysql_data:
