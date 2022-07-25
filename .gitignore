@@ -7,3 +7,4 @@ bin/main/
 gradle/
 .project/
 Docker/db/
+db/
