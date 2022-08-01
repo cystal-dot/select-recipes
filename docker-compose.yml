@@ -2,24 +2,22 @@ version: '3'
 
 services:
   db:
-    image: mysql:5.7
+    image: mysql:8.0.29
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --skip-character-set-client-handshake
-#    command: ['mysqld', '--character-set-server=utf8', '--collation-server=utf8_unicode_ci','--character-set-client=utf8','--collation-client=utf8_unicode_ci', '--character-set-connection=utf8','--collation-connection=utf8_unicode_ci', '--character-set-results=utf8','--collation-results=utf8_unicode_ci']
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-      MYSQL_USER: cys
-      MYSQL_PASSWORD: spring
+      MYSQL_DATABASE: "recipedb"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       TZ: 'Asia/Tokyo'
     ports:
-      - "3307:3306"
+      - "13306:3306"
 #      - '3306:3306' #localhostにいるdockerでもなんでもないmysqlのポートと被ってる → コンテナのIPアドレスのポート指定するから関係なかった。。
     # expose:
     #   - '3306'
     # expose:
     #   - '22'
     volumes:
-      - ./initdb:/docker-entrypoint-initdb.d
+      - ./Docker/initdb:/docker-entrypoint-initdb.d
       # データを永続的に保持するためにdbディレクトリを配置
-      - ./db:/var/lib/mysql
+      - ./Docker/initdb/db:/var/lib/mysql
 volumes:
   mysql_data:
