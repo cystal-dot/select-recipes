@@ -5,11 +5,11 @@ services:
     image: mysql:8.0.29
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --skip-character-set-client-handshake
     environment:
-      MYSQL_USER: "root"
-      MYSQL_PASSWORD: "root"
+      MYSQL_DATABASE: "recipedb"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       TZ: 'Asia/Tokyo'
     ports:
-      - "3306:3306"
+      - "13306:3306"
 #      - '3306:3306' #localhostにいるdockerでもなんでもないmysqlのポートと被ってる → コンテナのIPアドレスのポート指定するから関係なかった。。
     # expose:
     #   - '3306'
