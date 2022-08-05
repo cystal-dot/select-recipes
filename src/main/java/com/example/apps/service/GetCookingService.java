@@ -45,4 +45,13 @@ public class GetCookingService {
     public Cooking getIngredients(int DishId) {
         return CookingDAO.getCookingInfo(DishId);
     }
+
+    public String getDishName(int parseInt) {
+        return CookingDAO.getDishName(parseInt);
+    }
+
+    public String getGenre(int parseInt) {
+        return CookingDAO.getGenreName(parseInt);
+    }
+
 }

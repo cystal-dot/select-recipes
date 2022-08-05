@@ -34,4 +34,13 @@ public class CookingInfoDAO {
         cooking.setIngredient4(jdbcTemplate.queryForObject("SELECT Ingredient4 from ingredients where DishId = "+dishId, String.class));
         return cooking;
     }
+
+    public void updateDishNameAndGenreAndDishId(int dishId, String dishName, String genre) {
+        jdbcTemplate.update("UPDATE cooking SET DishName = ?, Genre = ? WHERE DishId = ?", dishName, genre, dishId);
+    }
+
+    public void insertDishNameAndGenre(String dishName, String genre) {
+        jdbcTemplate.update("INSERT INTO cooking (DishName, Genre) VALUES (?, ?)", dishName, genre);
+    }
+
 }

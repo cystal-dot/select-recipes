@@ -15,7 +15,7 @@ import com.example.apps.bean.Cooking;
 public class GetIngredientService {
 
     @Autowired
-    private IngredientInfoDAO IngredientDAO;
+    private IngredientInfoDAO ingredientDAO;
 
     @Autowired
     private CookingInfoDAO CookingDAO;
@@ -29,7 +29,7 @@ public class GetIngredientService {
         List<Map<String, Object>> getIngredientList = null;
 
         for(int i=1;i<LatestDishId+1;i++){
-            getIngredientList = IngredientDAO.GetIngredients(i);
+            getIngredientList = ingredientDAO.GetIngredients(i);
 
             //idから料理名取得
             String DishName = CookingDAO.getDishName(i);
@@ -54,5 +54,9 @@ public class GetIngredientService {
             }
         }
         return ingredientsList;
+    }
+
+    public List<Map<String, Object>> getIngredientInfo(int dishId) {
+        return ingredientDAO.GetIngredients(dishId);
     }
 }

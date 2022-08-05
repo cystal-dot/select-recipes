@@ -18,7 +18,18 @@ public class IngredientInfoDAO {
     }
 
     public List<Map<String, Object>> GetIngredients(int DishId) {
-        final String GetIngredientsSQL = "SELECT Ingredient1,Ingredient2,Ingredient3,Ingredient4 FROM ingredients WHERE DishId = "+DishId;
-        return jdbcTemplate.queryForList(GetIngredientsSQL);
+        // final String GetIngredientsSQL = "SELECT Ingredient1,Ingredient2,Ingredient3,Ingredient4 FROM ingredients WHERE DishId = "+DishId;
+        // return jdbcTemplate.queryForList(GetIngredientsSQL);
+        return jdbcTemplate.queryForList("SELECT Ingredient1,Ingredient2,Ingredient3,Ingredient4 FROM ingredients WHERE DishId = "+DishId);
+    }
+
+    public void updateIngredients(int dishId, String ingredient1, String ingredient2, String ingredient3,
+            String ingredient4) {
+        jdbcTemplate.update("UPDATE ingredients SET Ingredient1 = ?, Ingredient2 = ?, Ingredient3 = ?, Ingredient4 = ? WHERE DishId = ?", ingredient1, ingredient2, ingredient3, ingredient4, dishId);
+    }
+
+    public void InsertIngredients(int latestDishId, String ingredient1, String ingredient2, String ingredient3,
+            String ingredient4) {
+        jdbcTemplate.update("INSERT INTO ingredients (DishId, Ingredient1, Ingredient2, Ingredient3, Ingredient4) VALUES (?, ?, ?, ?, ?)", latestDishId, ingredient1, ingredient2, ingredient3, ingredient4);
     }
 }

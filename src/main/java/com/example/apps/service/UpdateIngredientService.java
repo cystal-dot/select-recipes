@@ -1,16 +1,22 @@
 package com.example.apps.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+
+import com.example.apps.DAO.IngredientInfoDAO;
 
 @Service
 public class UpdateIngredientService {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private IngredientInfoDAO ingredientInfoDAO;
     
     public void updateIngredients(int dishId, String ingredient1, String ingredient2, String ingredient3, String ingredient4) {
-        jdbcTemplate.update("UPDATE ingredients SET Ingredient1 = ?, Ingredient2 = ?, Ingredient3 = ?, Ingredient4 = ? WHERE DishId = ?", ingredient1, ingredient2, ingredient3, ingredient4, dishId);
+        ingredientInfoDAO.updateIngredients(dishId, ingredient1, ingredient2, ingredient3, ingredient4);
+    }
+
+    public void InsertIngredients(int latestDishId, String ingredient1, String ingredient2, String ingredient3,
+            String ingredient4) {
+        ingredientInfoDAO.InsertIngredients(latestDishId, ingredient1, ingredient2, ingredient3, ingredient4);
     }
 }

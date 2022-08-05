@@ -35,7 +35,7 @@ public class EditRecipesController {
     public String EditRecipe(@RequestParam("DishId") String DishId,@RequestParam("DishName") String DishName,@RequestParam("Genre") String Genre,@RequestParam("Ingredient1") String Ingredient1,@RequestParam("Ingredient2") String Ingredient2,@RequestParam("Ingredient3") String Ingredient3,@RequestParam("Ingredient4") String Ingredient4,Model model) {
 
         //IDを元に材料と名前を更新
-        updateCookingService.updateCooking(Integer.parseInt(DishId), DishName, Genre);
+        updateCookingService.updateDishNameAndGenreAndDishId(Integer.parseInt(DishId), DishName, Genre);
         updateIngredientService.updateIngredients(Integer.parseInt(DishId), Ingredient1, Ingredient2, Ingredient3, Ingredient4);
 
         List<Cooking> allingredientsList = getIngredientService.getAllIngredients();
