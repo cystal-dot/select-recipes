@@ -4,7 +4,6 @@ package com.example.apps.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +20,6 @@ import com.example.apps.service.UpdateIngredientService;
 public class EditRecipesController { 
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @Autowired
     private UpdateCookingService updateCookingService;
 
     @Autowired
@@ -34,7 +30,7 @@ public class EditRecipesController {
 
     DefaultController defaultController;
     
-    //編集作業。editrecipeページに飛ばして
+    //編集作業.editrecipeページに飛ばして
     @RequestMapping(value="/editinformation", method=RequestMethod.POST)
     public String EditRecipe(@RequestParam("DishId") String DishId,@RequestParam("DishName") String DishName,@RequestParam("Genre") String Genre,@RequestParam("Ingredient1") String Ingredient1,@RequestParam("Ingredient2") String Ingredient2,@RequestParam("Ingredient3") String Ingredient3,@RequestParam("Ingredient4") String Ingredient4,Model model) {
 
