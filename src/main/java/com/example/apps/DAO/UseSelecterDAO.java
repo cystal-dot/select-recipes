@@ -40,26 +40,4 @@ public class UseSelecterDAO {
         }
         return ingredientsList;
     }
-
-//     public String kaetemita(){
-//         System.out.println("koko");
-// //        final String testSQL = "SELECT * from cooking";
-// //        System.out.println(testSQL);
-//         //String r = jdbcTemplate.queryForObject(testSQL, String.class);
-//         String r = "rrr";
-//         // System.out.println(r);
-//         return r;
-//     }
-
-//     public String bbb(){
-//         System.out.println("koko");
-//         String SQL = "SELECT * FROM cooking";
-//         String r = jdbcTemplate.queryForObject(SQL, String.class);
-//         return r;
-//     }
-
-//     public String aaa(){
-//         System.out.println("inaaa");
-//         return "aaa";
-//     }
 }
