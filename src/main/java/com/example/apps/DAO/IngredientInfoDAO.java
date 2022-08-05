@@ -1,11 +1,15 @@
 package com.example.apps.DAO;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class GetCookingInfoDAO {
+public class IngredientInfoDAO {
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -13,11 +17,8 @@ public class GetCookingInfoDAO {
         return jdbcTemplate.queryForObject("SELECT DishId FROM cooking ORDER BY DishId DESC LIMIT 1", Integer.class);
     }
 
-    public String getDishName(int DishId) {
-        return jdbcTemplate.queryForObject("SELECT DishName from cooking where DishId = "+DishId, String.class);
-    }
-
-    public String getGenreName(int DishId) {
-        return jdbcTemplate.queryForObject("SELECT Genre from cooking where DishId = "+DishId, String.class);
+    public List<Map<String, Object>> GetIngredients(int DishId) {
+        final String GetIngredientsSQL = "SELECT Ingredient1,Ingredient2,Ingredient3,Ingredient4 FROM ingredients WHERE DishId = "+DishId;
+        return jdbcTemplate.queryForList(GetIngredientsSQL);
     }
 }

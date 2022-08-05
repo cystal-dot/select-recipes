@@ -5,24 +5,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import com.example.apps.DAO.GetCookingInfoDAO;
-import com.example.apps.DAO.GetIngredientInfoDAO;
+import com.example.apps.DAO.CookingInfoDAO;
+import com.example.apps.DAO.IngredientInfoDAO;
 import com.example.apps.bean.Cooking;
 
 @Service
 public class GetIngredientService {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private IngredientInfoDAO IngredientDAO;
 
     @Autowired
-    private GetIngredientInfoDAO IngredientDAO;
-
-    @Autowired
-    private GetCookingInfoDAO CookingDAO;
+    private CookingInfoDAO CookingDAO;
 
     final String GetLatestDishIdSQL = "SELECT DishId FROM cooking ORDER BY DishId DESC LIMIT 1";
     
